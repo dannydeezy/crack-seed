@@ -37,6 +37,9 @@ function bruteForce(startIndex) {
                             console.log(path)
                             console.dir(phrase)
                             console.log(address)
+                            fs.writeFileSync('success.json', JSON.stringify({
+                                path, phrase, address
+                            }))
                             return
                         }
                     }
