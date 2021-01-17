@@ -11,6 +11,7 @@ for (const word of guessSeedMain) {
     }
 }
 const config = JSON.parse(fs.readFileSync('./config.json'))
+const skipIndexes = fs.existsSync('./skipIndexes.json') ? JSON.parse(fs.readFileSync('./skipIndexes.json')) : []
 const addresses = config.addresses
 const pwd = config.pwd
 
@@ -19,6 +20,10 @@ function bruteForce(startIndex) {
     for (let w = startIndex; w < wordList.length; w++) {
         const w1 = wordList[w]
         console.log(`${w}-${w1}`)
+        if (skipIndexes.includes(w)) {
+            console.log(`Skipping ${w}`)
+            continue
+        }
         guessSeed[2] = w1
         for (const w2 of wordList) {
             guessSeed[9] = w2
